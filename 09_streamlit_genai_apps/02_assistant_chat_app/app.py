@@ -6,7 +6,7 @@ import time
 st.set_page_config(page_title="Technology Tutor", page_icon=":speech_balloon:")
 
 
-st.title('IT Expert')
+st.title('IT Expert Talha')
 st.write('Tutor will help you answer your questions about IT')
 
 
