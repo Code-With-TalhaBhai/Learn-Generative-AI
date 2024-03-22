@@ -1,6 +1,8 @@
 import streamlit as st
 
 
+st.write(st.session_state)
+
 if "count" not in st.session_state:
     st.session_state.count = 0
 
