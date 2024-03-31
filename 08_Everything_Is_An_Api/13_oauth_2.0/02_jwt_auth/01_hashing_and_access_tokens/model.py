@@ -2,10 +2,10 @@ from pydantic import BaseModel
 
 
 class User(BaseModel):
-    username: str = None
-    full_name: str = None
-    email: str = None
-    disabled: bool | None
+    username: str | None = None
+    full_name: str | None = None
+    email: str | None = None
+    disabled: bool | None = None
 
 class Token(BaseModel):
     access_token:str
@@ -16,5 +16,5 @@ class TokenData(BaseModel):
 
 
 class UserInDb(User):
-    hashed_password: str = None
+    hashed_password: str | None
 
