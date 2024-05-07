@@ -14,6 +14,7 @@ database_url = os.environ.get('DATABASE_URL')
 class Hero(SQLModel,table=True):
     id: int | None = Field(default=None,primary_key=True)
     name: str
+    # name: str = Field(index=True) To define index for fast queries
     secret_name: str
     age: int | None = None
 
@@ -22,8 +23,8 @@ class Hero(SQLModel,table=True):
 engine = create_engine(database_url,echo=True)
 
 def create_table():
-    Hero(name="Talha",secret_name="tk")
-    SQLModel.metadata.create_all(engine)
+    SQLModel.metadata.create_all(engine) # Creating migration (table+schema)
 
 
-create_table()
+if __name__ == "__main__":
+    create_table()
