@@ -13,47 +13,62 @@ def create_hero():
         doctor_st = Hero_T(name="Doctor Strange",secret_name="Dr_st",team_id=avengers_team.id)
         black_sp = Hero_T(name="Black Spider",secret_name="b_sp",team_id=spider_team.id)
         hulk = Hero_T(name="Green Hulk",secret_name="hk",team_id=avengers_team.id)
+        batman = Hero_T(name="Batman",secret_name="bt",team_id=spider_team.id)
 
         session.add(doctor_st)
         session.add(black_sp)
         session.add(hulk)
+        session.add(batman)
         session.commit()
 
         session.refresh(doctor_st)
         session.refresh(black_sp)
         session.refresh(hulk)
+        session.refresh(batman)
 
         print("Doctor Strange Hero",doctor_st)
         print("Black Spider Hero",black_sp)
         print("Hulk Hero",hulk)
+        print("Batman Hero",batman)
 
 
 def read_hero_teams():
     with Session(engine) as session:
-        # team = session.exec(select(Team).where(Team.id == 2))
-        # hero = session.exec(select(Hero_T).where(Hero_T.id == 2))
-
         statement = select(Hero_T,Team).where(Hero_T.team_id == Team.id)
-        # statement1 = select(team,hero).where(team.id == hero.id)
-        # statement2 = select(hero,team).where(hero.id == team.id)
 
         result = session.exec(statement).all()
-        # result1 = session.exec(statement1).all()
-        # result2 = session.exec(statement2).all()
-
-        # for res1 in result1:
-            # print("Left Table Team: ",res1)
-
-        # for res2 in result2:
-            # print("Left Table Hero: ",res2)
-
         for res in result:
             print("Final Result",res)
 
+
+def update_hero():
+    with Session(engine) as session:
+        statement = select(Hero_T).where(Hero_T.name == "Batman")
+        result = session.exec(statement).one()
+
+        result.team_id = 1 # updating spider_team with team_avengers
+        session.add(result)
+        session.commit()
+
+
+
+def delete_team_connection():
+    with Session(engine) as session:
+        statement = select(Hero_T).where(Hero_T.name == "Green Hulk")
+        hulk = session.exec(statement).one()
+
+        hulk.team_id = None
+        session.add(hulk)
+        session.commit()
+
+        session.refresh(hulk)
+        print("No team assoscialted with hulk",hulk)
 
 
 
 
 if __name__ == "__main__":
     # create_hero()
-    read_hero_teams()
+    # read_hero_teams()
+    # update_hero()
+    delete_team_connection()
