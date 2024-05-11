@@ -2,13 +2,12 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from sqlmodel import SQLModel
 from sqlmodel_api.models import Todo
-# from sqlmodel_api.connect import engine
+from sqlmodel_api.connect import engine
 
 
 def create_tables():
-    # SQLModel.metadata.create_all(engine)
-    ...
-
+    SQLModel.metadata.create_all(engine)
+    print(Todo)
 
 @asynccontextmanager
 async def lifespan(app:FastAPI):
