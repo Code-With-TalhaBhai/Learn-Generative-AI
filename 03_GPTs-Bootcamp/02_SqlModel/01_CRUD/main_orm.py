@@ -53,8 +53,8 @@ def delete_data():
     with Session(engine) as session:
         stmt = select(Hero).where(Hero.name == "Hassan")
         results = session.exec(stmt)
-        # single = results.first() # for one row
-        # session.delete(single)
+        single = results.first() # for one row
+        session.delete(single)
 
         # for res in results: # for two rows
         #     single = session.delete(res)
