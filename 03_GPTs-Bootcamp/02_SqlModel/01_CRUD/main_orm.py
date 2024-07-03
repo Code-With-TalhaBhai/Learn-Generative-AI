@@ -8,7 +8,7 @@ from main_engine import Hero
 # Creating data inside table
 def create_data():
     hero1 = Hero(name="Jazib",secret_name="jz")
-    hero2 = Hero(name="Hassan",secret_name="hs",age=21)
+    hero2 = Hero(name="TAlha",secret_name="hs",age=21)
     hero3 = Hero(name="Qamber",secret_name="pl")
 
     with Session(engine) as session:
