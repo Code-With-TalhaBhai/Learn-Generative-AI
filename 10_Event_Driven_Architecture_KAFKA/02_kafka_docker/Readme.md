@@ -29,13 +29,17 @@ The working directory which has all shell scripts of kafka is:
     /opt/kafka/bin/kafka-topics.sh --create --topic first-docker-topic --bootstrap-server localhost:9092
 ```
 
+
 6. Then, create the `producer` of the event using: 
 ```
     /opt/kafka/bin/kafka-console-producer.sh --topic first-docker-topic --bootstrap-server localhost:9092
 ```
+send some events from here.
 
 
 7. Open, new terminal and again step into the container again defined at step 4
 ```
     /opt/kafka/bin/kafka-console-consumer.sh --topic first-docker-topic --from-beginning --bootsrap-server localhost:9092
 ```
+
+Observe the events.
