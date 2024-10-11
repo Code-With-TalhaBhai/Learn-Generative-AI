@@ -1,0 +1,11 @@
+
+name: "auth"
+services:
+  auth_service:
+    build:
+      context: ./auth_service
+      dockerfile: Dockerfile
+    container_name: container_auth
+    ports:
+      - "8000:8000"
+  
