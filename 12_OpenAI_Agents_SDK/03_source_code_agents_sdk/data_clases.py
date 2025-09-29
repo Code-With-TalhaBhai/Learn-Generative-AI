@@ -54,7 +54,9 @@ class Employee(Person):
 # Its __init__ method will take name, age, and employee_id as arguments.
 emp1 = Employee(name="Alice", age=30, employee_id=123)
 emp2 = Employee(name="Rax", age=31, employee_id=123)
+emp3 = Employee(name="Wax", age=31, employee_id=123)
 print(emp1)
 print(emp2)
+print(emp3)
 # Output: Employee(name='Alice', age=30, employee_id=123)
 
