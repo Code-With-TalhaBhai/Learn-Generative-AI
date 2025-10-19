@@ -1,0 +1,24 @@
+.env
+.env.local
+.venv/
+__pycache__/
+.ipynb_checkpoints
+.vscode/
+.DS_Store
+*.pyc
+instance/
+env/
+venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+# Logs
+logs/
+*.log
+# Temporary files
+tmp/
+*.tmp
+# IDE specific files
+.idea/
+*.sublime-project
+*.sublime-workspace
