@@ -1,0 +1,11 @@
+[project]
+name = "computer-tool"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "dotenv>=0.9.9",
+    "openai-agents>=0.6.3",
+    "playwright>=1.57.0",
+]
