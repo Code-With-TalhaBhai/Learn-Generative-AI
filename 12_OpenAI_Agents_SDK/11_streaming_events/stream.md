@@ -19,7 +19,7 @@ type: Literal['raw_response_event'] = 'raw_response_event'
 ***RunItemStreamEvent:***
 Streaming events that wrap a RunItem. As the agent processes the LLM response, it will generate these events for new messages, tool calls, tool outputs, handoffs, etc.
 
-There are different kinds of events:
+There are different kinds of events(RunItemStreamEvent.name):
 
 - message_output_created
 - handoff_requested
