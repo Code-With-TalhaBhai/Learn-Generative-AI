@@ -1,0 +1,87 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam stereotypeCBackgroundColor White
+skinparam classFontSize 13
+
+title OpenAI Agents - Tracing (traces.py) - Class Diagram
+
+package "agents.tracing" {
+
+  interface Trace {
+    + {abstract} __enter__() : Trace
+    + {abstract} __exit__(exc_type, exc_val, exc_tb)
+    + {abstract} start(mark_as_current: bool = false)
+    + {abstract} finish(reset_current: bool = false)
+    + {abstract} trace_id : str <<get>>
+    + {abstract} name : str <<get>>
+    + {abstract} export() : dict[str, Any] | None
+    + {abstract} tracing_api_key : str | None <<get>>
+  }
+
+  class NoOpTrace {
+    - _started : bool
+    - _prev_context_token : contextvars.Token | None
+    + __init__()
+    + __enter__() : Trace
+    + __exit__(exc_type, exc_val, exc_tb)
+    + start(mark_as_current: bool = false)
+    + finish(reset_current: bool = false)
+    + trace_id : str <<get>>  // "no-op"
+    + name : str <<get>>      // "no-op"
+    + export() : None
+    + tracing_api_key : None <<get>>
+  }
+
+  class TraceImpl {
+    - _name : str
+    - _trace_id : str
+    - _tracing_api_key : str | None
+    - group_id : str | None
+    - metadata : dict[str, Any] | None
+    - _prev_context_token : contextvars.Token | None
+    - _processor : TracingProcessor
+    - _started : bool
+    + __init__(name, trace_id?, group_id?, metadata?, processor, tracing_api_key?)
+    + __enter__() : Trace
+    + __exit__(exc_type, exc_val, exc_tb)
+    + start(mark_as_current: bool = false)
+    + finish(reset_current: bool = false)
+    + trace_id : str <<get>>
+    + name : str <<get>>
+    + tracing_api_key : str | None <<get>>
+    + export() : dict[str, Any]
+  }
+
+  ' Relationships
+  NoOpTrace .|> Trace
+  TraceImpl .|> Trace
+
+  note right of Trace
+    Abstract base class for all traces
+    Context manager + explicit start/finish
+  end note
+
+  note right of NoOpTrace
+    Used when tracing is disabled
+    Minimal overhead, no data collection
+  end note
+
+  note right of TraceImpl
+    Real implementation that records traces
+    Interacts with TracingProcessor
+  end note
+
+}
+
+' External dependencies (simplified)
+class "contextvars.Token" as Token
+class "TracingProcessor" as Processor
+class "Scope" as Scope <<static/context manager>>
+
+TraceImpl --> Processor : uses
+TraceImpl --> Scope    : uses
+NoOpTrace   --> Scope  : uses
+
+@enduml
