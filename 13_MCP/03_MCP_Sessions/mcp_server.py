@@ -48,7 +48,6 @@ def doc_content(doc_id: str):
 
 
 # TODO: Write a prompt to rewrite a doc in markdown format
-# @mcp.prompt()
 @mcp.prompt(name="format", description="Rewrites the contents of the document in Markdown format")
 def format_document(doc_id: str)->list[base.Message]:
     prompt = f"""
@@ -66,7 +65,7 @@ def format_document(doc_id: str)->list[base.Message]:
     return [base.UserMessage(prompt)]
 
 
-
+# TODO: Write a prompt to summarize a doc
 @mcp.prompt(name="summarize", description="Summarizes the contents of the document")
 def summarize_document(doc_id: str ) -> list[PromptMessage]:
 

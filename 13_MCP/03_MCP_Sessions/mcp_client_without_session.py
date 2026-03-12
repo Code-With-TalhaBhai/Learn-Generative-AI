@@ -5,7 +5,7 @@ headers = {
     "Accept": "application/json,text/event-stream"
 }
 
-url = "http://localhost:8000/mcp/"
+url = "http://localhost:8000/mcp/"  
 
 
 
